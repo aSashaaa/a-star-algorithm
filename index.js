@@ -14,7 +14,7 @@ const goalPoint = {
   x: args[2],
   y: args[3],
 };
-console.log(lockedNodesArgs.length);
+
 for (let i = 0; i < lockedNodesArgs.length; i += 2) {
   lockedNodes.push([lockedNodesArgs[i], lockedNodesArgs[i + 1]]);
 }
@@ -76,10 +76,16 @@ while (!found) {
   }
 
   chosenNode = possibleNodes
-    .filter((node) => !node.locked)
+    .filter(
+      (node) =>
+        !node.locked &&
+        !pathNodes.find(
+          (pathNode) => pathNode.x == node.x && pathNode.y == node.y
+        )
+    )
     .reduce((prev, current) => (+prev.f < +current.f ? prev : current));
-  console.log(chosenNode);
-  if (chosenNode.h == 0) found = true;
+  console.log(possibleNodes);
+  if (chosenNode.h == 0 || chosenNode.g > 500) found = true;
   pathNodes.push(chosenNode);
   possibleNodes = [];
 }
