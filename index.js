@@ -84,14 +84,12 @@ while (!found) {
         )
     )
     .reduce((prev, current) => (+prev.f < +current.f ? prev : current));
-  console.log(possibleNodes);
   if (chosenNode.h == 0 || chosenNode.g > 500) found = true;
   pathNodes.push(chosenNode);
   possibleNodes = [];
 }
 
 pathNodes = pathNodes.slice(1, pathNodes.length - 1);
-console.log(pathNodes);
 
 function Node(x, y) {
   this.x = x;
